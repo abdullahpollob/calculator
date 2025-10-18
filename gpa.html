@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPA Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(45deg, #6a11cb, #2575fc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 10px;
+    }
+
+    .box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 330px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 12px;
+      background: linear-gradient(45deg, #2575fc, #6a11cb);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: .3s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      color: red;
+    }
+
+    #result {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 17px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <h2>📊 GPA Calculator</h2>
+    <input type="text" id="roll" placeholder="Roll Number">
+    <input type="text" id="reg" placeholder="Registration Number">
+    <input type="text" id="year" placeholder="Passing Year">
+    <input type="number" id="marks" placeholder="Total Marks (0-100)">
+    <button onclick="calcGPA()">Calculate GPA</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calcGPA() {
+      let roll = document.getElementById('roll').value.trim();
+      let reg = document.getElementById('reg').value.trim();
+      let year = document.getElementById('year').value.trim();
+      let marks = Number(document.getElementById('marks').value);
+
+      if (!roll || !reg || !year || isNaN(marks)) {
+        document.getElementById('result').innerText = "⚠️ Fill all fields properly!";
+        return;
+      }
+
+      let gpa, grade;
+      if (marks >= 80) { gpa = 5.00; grade = "A+"; }
+      else if (marks >= 70) { gpa = 4.00; grade = "A"; }
+      else if (marks >= 60) { gpa = 3.50; grade = "A-"; }
+      else if (marks >= 50) { gpa = 3.00; grade = "B"; }
+      else if (marks >= 40) { gpa = 2.00; grade = "C"; }
+      else if (marks >= 33) { gpa = 1.00; grade = "D"; }
+      else { gpa = 0.00; grade = "F"; }
+
+      document.getElementById('result').innerHTML =
+        `✅ Roll: ${roll}<br>
+         📝 Reg: ${reg}<br>
+         📅 Year: ${year}<br>
+         📊 GPA: ${gpa.toFixed(2)} | Grade: ${grade}`;
+    }
+  </script>
+</body>
+
+</html>
